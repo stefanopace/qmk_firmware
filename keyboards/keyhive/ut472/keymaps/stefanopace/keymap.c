@@ -46,6 +46,8 @@ qk_tap_dance_action_t tap_dance_actions[] = {
 uint8_t ls;
 uint8_t rs;
 
+#define COMPOSE_KEY X_APP
+
 #define LTFN_ESC LT(_FN, KC_ESC)
 #define LTSYM_F LT(_SYM, KC_F)
 #define LTSYM_J LT(_SYM, KC_J)
@@ -217,7 +219,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"`");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"`");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
@@ -238,7 +240,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"`");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"`");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
@@ -259,7 +261,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"'");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"'");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
@@ -280,7 +282,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"`");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"`");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
@@ -301,7 +303,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"`");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"`");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
@@ -322,7 +324,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (rs) {
                     unregister_code(KC_RSHIFT);
                 }
-                SEND_STRING(SS_TAP(X_APP)"`");
+                SEND_STRING(SS_TAP(COMPOSE_KEY)"`");
                 if (ls) {
                     register_code(KC_LSHIFT);
                 }
