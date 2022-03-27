@@ -125,10 +125,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * `----------------------------------------------------------------------------'
         */
     [_QWE] = LAYOUT(
-        LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,      KC_T,    KC_Y,    KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
-        KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,   KC_G,    KC_H,    LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        KC_LSFT,   KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,    KC_N,    KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  KC_CAPS,
-        KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_ACC), MO(_NAV),       KC_SPC,      MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
+        LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,           KC_T,    KC_Y,           KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
+        KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,        KC_G,    KC_H,           LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
+        KC_LSFT,   KC_Z,     KC_X,     KC_C,     LT(_ACC, KC_V), KC_B,    KC_N,    LT(_ACC, KC_M),   KC_COMM,  KC_DOT,   SFT_SLSH,  KC_CAPS,
+        KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_ACC), MO(_NAV),            KC_SPC,            MO(_NUM),   KC_LEFT,   KC_DOWN,  KC_UP,    KC_RGHT
     ),
 
        /* Symbols Layer (Sym)
