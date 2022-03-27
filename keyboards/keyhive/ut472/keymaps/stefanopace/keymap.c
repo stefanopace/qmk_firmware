@@ -43,6 +43,9 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
 };
 
+uint8_t ls;
+uint8_t rs;
+
 #define LTFN_ESC LT(_FN, KC_ESC)
 #define LTSYM_F LT(_SYM, KC_F)
 #define LTSYM_J LT(_SYM, KC_J)
@@ -205,32 +208,128 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case M_A_GRV:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"`a");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"`");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("a");
             }
             break;
         case M_E_GRV:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"`e");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"`");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("e");
             }
             break;
         case M_E_ACU:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"'e");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"'");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("e");
             }
             break;
         case M_I_GRV:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"`i");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"`");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("i");
             }
             break;
         case M_O_GRV:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"`o");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"`");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("o");
             }
             break;
         case M_U_GRV:
             if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_APP)"`u");
+                ls = get_mods() & MOD_BIT(KC_LSHIFT);
+                rs = get_mods() & MOD_BIT(KC_RSHIFT);
+
+                if (ls) {
+                    unregister_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    unregister_code(KC_RSHIFT);
+                }
+                SEND_STRING(SS_TAP(X_APP)"`");
+                if (ls) {
+                    register_code(KC_LSHIFT);
+                }
+                if (rs) {
+                    register_code(KC_RSHIFT);
+                }
+                SEND_STRING("u");
             }
             break;
     }
