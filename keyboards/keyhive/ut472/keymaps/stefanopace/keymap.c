@@ -23,23 +23,30 @@ enum layers {
     _NAV,
     _NV2,
     _FN,
+    _ACC,
+};
+
+enum custom_keycodes {
+    M_A_GRV = SAFE_RANGE,
+    M_E_GRV,
+    M_E_ACU,
+    M_I_GRV,
+    M_O_GRV,
+    M_U_GRV,
 };
 
 enum tapdance {
     TD_SINGLE_QUOTE_DOUBLE_QUOTES,
-    TD_APP_CAPS_LOCK,
 };
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
-    [TD_APP_CAPS_LOCK]              = ACTION_TAP_DANCE_DOUBLE(KC_APP, KC_CAPS),
 };
 
 #define LTFN_ESC LT(_FN, KC_ESC)
 #define LTSYM_F LT(_SYM, KC_F)
 #define LTSYM_J LT(_SYM, KC_J)
 #define TD_QUOT TD(TD_SINGLE_QUOTE_DOUBLE_QUOTES)
-#define TD_APP_CAPS TD(TD_APP_CAPS_LOCK)
 #define SFT_SLSH RSFT_T(KC_SLSH)
 
 #define UNDO LCTL(KC_Z)
@@ -78,8 +85,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWE] = LAYOUT(
         LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,      KC_T,    KC_Y,    KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
         KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,   KC_G,    KC_H,    LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        KC_LSFT,   KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,    KC_N,    KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  TD_APP_CAPS,
-        KC_LCTL,   KC_LGUI,  KC_LALT,  KC_PAUS,  TT(_NAV),       KC_SPC,      TT(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
+        KC_LSFT,   KC_Z,     KC_X,     KC_C,     KC_V,      KC_B,    KC_N,    KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  KC_CAPS,
+        KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_ACC), MO(_NAV),       KC_SPC,      MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
 
        /* Symbols Layer (Sym)
@@ -182,4 +189,60 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_SLCK,  RGB_M_P, RGB_M_B,  RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K,  KC_F7,    KC_F8,    KC_F9,    KC_F12,  XXXXXXX,
         KC_INS,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
     ),
+           
+        /* Accented letters layer
+        * 
+        * 
+        * ,----------------------------------------------------------------------------.
+        * |Esc-Fn|  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | Bspace  |
+        * |----------------------------------------------------------------------------+
+        * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  |  '*  | Enter |
+        * |----------------------------------------------------------------------------+
+        * | Shift  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Menu*|
+        * |----------------------------------------------------------------------------+
+        * | Ctrl | Gui | Alt |Pause|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
+        * `----------------------------------------------------------------------------'
+        */
+    [_ACC] = LAYOUT(
+        _______, _______, _______, M_E_GRV, _______, _______, _______, M_U_GRV, M_I_GRV, M_O_GRV, _______, _______,
+        _______, M_A_GRV, _______, M_E_ACU, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______,      _______,     _______, _______, _______, _______, _______
+    ),
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case M_A_GRV:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"`a");
+            }
+            break;
+        case M_E_GRV:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"`e");
+            }
+            break;
+        case M_E_ACU:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"'e");
+            }
+            break;
+        case M_I_GRV:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"`i");
+            }
+            break;
+        case M_O_GRV:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"`o");
+            }
+            break;
+        case M_U_GRV:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_APP)"`u");
+            }
+            break;
+    }
+    return true;
+}
