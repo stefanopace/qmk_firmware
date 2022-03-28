@@ -233,16 +233,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         switch (keycode) {
             case M_A_GRV:
                 type_accented_letter(KC_A, KC_GRV);
-                break;
+                return false;
             case M_I_GRV:
                 type_accented_letter(KC_I, KC_GRV);
-                break;
+                return false;
             case M_O_GRV:
                 type_accented_letter(KC_O, KC_GRV);
-                break;
+                return false;
             case M_U_GRV:
                 type_accented_letter(KC_U, KC_GRV);
-                break;
+                return false;
         }
     }
     return true;
