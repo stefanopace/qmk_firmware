@@ -57,47 +57,7 @@ enum tapdance {
     TD_E_GRV_ACU
 };
 
-static uint8_t ls;
-static uint8_t rs;
-
-void dance_e_finished (qk_tap_dance_state_t *state, void *user_data) {
-    ls = (get_mods() & (MOD_BIT(KC_LSHIFT)));
-    rs = (get_mods() & (MOD_BIT(KC_RSHIFT)));
-
-    if (ls) {
-        unregister_mods(MOD_BIT(KC_LSHIFT));
-    }
-    if (rs) {
-        unregister_mods(MOD_BIT(KC_RSHIFT));
-    }
-
-    register_code(COMPOSE_KEY);
-    unregister_code(COMPOSE_KEY);
-
-    if (state->count == 1) {
-        register_code(KC_GRV);
-        unregister_code(KC_GRV);
-    } else {
-        register_code(KC_QUOT);
-        unregister_code(KC_QUOT);
-    }
-
-    if (ls) {
-        register_mods(MOD_BIT(KC_LSHIFT));
-    }
-    if (rs) {
-        register_mods(MOD_BIT(KC_RSHIFT));
-    }
-
-    register_code(KC_E);
-    unregister_code(KC_E);
-}
-
-
-qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
-    [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (dance_e_finished)
-};
+static uint8_t shifts_state;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        /* Base qwerty Layer
@@ -243,108 +203,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 };
 
+void type_accented_letter(uint16_t keycode, uint16_t accent_keycode) {
+    shifts_state = get_mods() & (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT));
+
+    unregister_mods(shifts_state);
+
+    tap_code(COMPOSE_KEY);
+    tap_code(accent_keycode);
+
+    register_mods(shifts_state);
+    
+    tap_code(keycode);
+}
+
+void type_accented_e (qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        type_accented_letter(KC_E, KC_GRV);
+    } else {
+        type_accented_letter(KC_E, KC_QUOT);
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case M_A_GRV:
-            if (record->event.pressed) {
-                ls = get_mods() & MOD_BIT(KC_LSHIFT);
-                rs = get_mods() & MOD_BIT(KC_RSHIFT);
-
-                if (ls) {
-                    unregister_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    unregister_code(KC_RSHIFT);
-                }
-                register_code(COMPOSE_KEY);
-                unregister_code(COMPOSE_KEY);
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
-                if (ls) {
-                    register_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    register_code(KC_RSHIFT);
-                }
-                register_code(KC_A);
-                unregister_code(KC_A);
-            }
-            break;
-        case M_I_GRV:
-            if (record->event.pressed) {
-                ls = get_mods() & MOD_BIT(KC_LSHIFT);
-                rs = get_mods() & MOD_BIT(KC_RSHIFT);
-
-                if (ls) {
-                    unregister_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    unregister_code(KC_RSHIFT);
-                }
-                register_code(COMPOSE_KEY);
-                unregister_code(COMPOSE_KEY);
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
-                if (ls) {
-                    register_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    register_code(KC_RSHIFT);
-                }
-                register_code(KC_I);
-                unregister_code(KC_I);
-            }
-            break;
-        case M_O_GRV:
-            if (record->event.pressed) {
-                ls = get_mods() & MOD_BIT(KC_LSHIFT);
-                rs = get_mods() & MOD_BIT(KC_RSHIFT);
-
-                if (ls) {
-                    unregister_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    unregister_code(KC_RSHIFT);
-                }
-                register_code(COMPOSE_KEY);
-                unregister_code(COMPOSE_KEY);
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
-                if (ls) {
-                    register_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    register_code(KC_RSHIFT);
-                }
-                register_code(KC_O);
-                unregister_code(KC_O);
-            }
-            break;
-        case M_U_GRV:
-            if (record->event.pressed) {
-                ls = get_mods() & MOD_BIT(KC_LSHIFT);
-                rs = get_mods() & MOD_BIT(KC_RSHIFT);
-
-                if (ls) {
-                    unregister_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    unregister_code(KC_RSHIFT);
-                }
-                register_code(COMPOSE_KEY);
-                unregister_code(COMPOSE_KEY);
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
-                if (ls) {
-                    register_code(KC_LSHIFT);
-                }
-                if (rs) {
-                    register_code(KC_RSHIFT);
-                }
-                register_code(KC_U);
-                unregister_code(KC_U);
-            }
-            break;
+    if (record->event.pressed) {         
+        switch (keycode) {
+            case M_A_GRV:
+                type_accented_letter(KC_A, KC_GRV);
+                break;
+            case M_I_GRV:
+                type_accented_letter(KC_I, KC_GRV);
+                break;
+            case M_O_GRV:
+                type_accented_letter(KC_O, KC_GRV);
+                break;
+            case M_U_GRV:
+                type_accented_letter(KC_U, KC_GRV);
+                break;
+        }
     }
     return true;
 }
+
+qk_tap_dance_action_t tap_dance_actions[] = {
+    [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
+    [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e)
+};
