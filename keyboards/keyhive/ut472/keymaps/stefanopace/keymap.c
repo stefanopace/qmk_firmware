@@ -105,23 +105,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * 
         * Holding Esc activates the Fn layer
         * Holding F or J activates Symbols layer
+        * Holding M or V activates Accented letters layer
         * Holding / acts as Shift
         * Double tap on ' acts as "
-        * Double tap on Menu activates CapsLock
         * 
         * Nav and Num layers are togglable with triple tapping on relative keys while holding them will activate layers momentarily.
-        * 
-        * I personally use Pause to mute/unmute microphone
-        * I personally use Menu to act as compose key to input accented letters
         * 
         * ,----------------------------------------------------------------------------.
         * |Esc-Fn|  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | Bspace  |
         * |----------------------------------------------------------------------------+
-        * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  |  '*  | Enter |
+        * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  | '/"  | Enter |
         * |----------------------------------------------------------------------------+
-        * | Shift  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Menu*|
+        * | Shift  |  Z  |  X  |  C  |V-Acc|  B  |  N  |M-Acc|  ,  |  .  |/-Shift| Led |
         * |----------------------------------------------------------------------------+
-        * | Ctrl | Gui | Alt |Pause|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
+        * | Ctrl | Gui | Alt |CLock|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
         * `----------------------------------------------------------------------------'
         */
     [_QWE] = LAYOUT(
@@ -151,7 +148,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
        /* Numbers Layer (Num)
         *
-        * Custom2 will act as Ctrl+Shift+Alt+"+" that can be used for example to spawn new terminal instances
         * ,----------------------------------------------------------------------------.
         * |      |     |     |     |     |    |Ctrl-y|     |     |     |     |         |
         * |----------------------------------------------------------------------------+
@@ -159,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |----------------------------------------------------------------------------+
         * |        |Ctr-z|Ctr-x|Ctr-c|Ctr-v|     |     |     |  ,  |  .  |      |      |
         * |----------------------------------------------------------------------------+
-        * |      |     |     |    |Custom2|           |      |     |     |      |      |
+        * |      |     |     |    |       |           |      |     |     |      |      |
         * `----------------------------------------------------------------------------'
         */
     [_NUM] = LAYOUT(
@@ -216,13 +212,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
        /* Fn Layer (Fn)
         * ,----------------------------------------------------------------------------.
-        * |      |     |     |     |     |     |     | F1  | F2  | F3  | F10 |         |
+        * |      |     |Print|SLock| Ins |     |     | F1  | F2  | F3  | F10 |         |
         * |----------------------------------------------------------------------------+
-        * | Print |     |     |     |     |     |     | F4  | F5  | F6  | F11  |       |
+        * |       |     |     |     |     |     |     | F4  | F5  | F6  | F11  |       |
         * |----------------------------------------------------------------------------+
-        * |ScrLock |     |     |     |     |     |     | F7  | F8  | F9  | F12  |      |
+        * |        |     |     |     |     |     |     | F7  | F8  | F9  | F12  |      |
         * |----------------------------------------------------------------------------+
-        * | Ins  |     |     |     |     |            |      |     |     |      |      |
+        * |      |     |     |     |     |            |      |     |     |      |      |
         * `----------------------------------------------------------------------------'
         */
     [_FN] = LAYOUT(
@@ -233,6 +229,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
            
         /* Accented letters layer
+        *
+        * For this to work you have to set the compose key on the os
+        *
+        * Double tap on è acts as é
+        *
         * ,----------------------------------------------------------------------------.
         * |      |     |     | è/é |     |     |     |  ù  |  ì  |  ò  |     |         |
         * |----------------------------------------------------------------------------+
