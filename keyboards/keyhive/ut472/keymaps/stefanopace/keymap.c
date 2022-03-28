@@ -31,7 +31,6 @@
 #define PASTE LCTL(KC_V)
 
 #define CUSTOM1 LCA(KC_EQL)
-#define CUSTOM2 MEH(KC_PLUS)
 
 #define L_SHIFT_HELD (get_mods() & (MOD_BIT(KC_LSFT)))
 #define R_SHIFT_HELD (get_mods() & (MOD_BIT(KC_RSFT)))
@@ -44,6 +43,7 @@ enum layers {
     _NV2,
     _FN,
     _ACC,
+    _LED,
 };
 
 enum custom_keycodes {
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWE] = LAYOUT(
         LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,           KC_T,    KC_Y,           KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
         KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,        KC_G,    KC_H,           LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        KC_LSFT,   KC_Z,     KC_X,     KC_C,     LT(_ACC, KC_V), KC_B,    KC_N,    LT(_ACC, KC_M),   KC_COMM,  KC_DOT,   SFT_SLSH,  RGB_TOG,
+        KC_LSFT,   KC_Z,     KC_X,     KC_C,     LT(_ACC, KC_V), KC_B,    KC_N,    LT(_ACC, KC_M),   KC_COMM,  KC_DOT,   SFT_SLSH,  MO(_LED),
         KC_LCTL,   KC_LGUI,  KC_LALT,  KC_CAPS,  MO(_NAV),            KC_SPC,            MO(_NUM),   KC_LEFT,   KC_DOWN,  KC_UP,    KC_RGHT
     ),
 
@@ -166,7 +166,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  REDO,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
         _______,  KC_1,     KC_2,     KC_3,     KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
         _______,  UNDO,     CUT,      COPY,     PASTE,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   _______,  _______,
-        _______,  _______,  _______,  _______,  CUSTOM2,        _______,       _______,  _______,  _______,  _______,  _______
+        _______,  _______,  _______,  _______,  XXXXXXX,        _______,       _______,  _______,  _______,  _______,  _______
     ),
 
        /* Navigation Layer (Nav)
@@ -226,20 +226,46 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * `----------------------------------------------------------------------------'
         */
     [_FN] = LAYOUT(
-        _______,  RGB_TOG, RGB_RMOD, RGB_MOD, RGB_HUD,  RGB_HUI,  XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F10,  XXXXXXX,
-        KC_PSCR,  RGB_SAD, RGB_SAI,  RGB_VAD, RGB_VAI,  RGB_SPD,  RGB_SPI,  KC_F4,    KC_F5,    KC_F6,    KC_F11,  XXXXXXX,
-        KC_SLCK,  RGB_M_P, RGB_M_B,  RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K,  KC_F7,    KC_F8,    KC_F9,    KC_F12,  XXXXXXX,
-        KC_INS,   XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
+        _______,  XXXXXXX, KC_PSCR,  KC_SLCK, KC_INS,  XXXXXXX, XXXXXXX,  KC_F1,    KC_F2,    KC_F3,    KC_F10,  XXXXXXX,
+        XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F11,  XXXXXXX,
+        XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12,  XXXXXXX,
+        XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,      XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
     ),
            
         /* Accented letters layer
-        * 
+        * ,----------------------------------------------------------------------------.
+        * |      |     |     | è/é |     |     |     |  ù  |  ì  |  ò  |     |         |
+        * |----------------------------------------------------------------------------+
+        * |       |  à  |     |     |     |     |     |     |     |     |      |       |
+        * |----------------------------------------------------------------------------+
+        * |        |     |     |     |     |     |     |     |     |     |      |      |
+        * |----------------------------------------------------------------------------+
+        * |      |     |     |     |     |            |      |     |     |      |      |
+        * `----------------------------------------------------------------------------'
         */
     [_ACC] = LAYOUT(
         _______, _______, _______, TD(TD_E_GRV_ACU), _______, _______, _______, M_U_GRV, M_I_GRV, M_O_GRV, _______, _______,
         _______, M_A_GRV, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______,
         _______, _______, _______,          _______, _______,      _______,     _______, _______, _______, _______, _______
+    ),
+
+        /* Led layer
+        * ,----------------------------------------------------------------------------.
+        * |      |     |     |     |     |     |     |     |     |     |     |         |
+        * |----------------------------------------------------------------------------+
+        * |       |     |     |     |     |     |     |     |     |     |      |       |
+        * |----------------------------------------------------------------------------+
+        * |        |     |     |     |     |     |     |     |     |     |      |      |
+        * |----------------------------------------------------------------------------+
+        * |      |     |     |     |     |            |      |     |     |      |      |
+        * `----------------------------------------------------------------------------'
+        */
+    [_LED] = LAYOUT(
+        XXXXXXX, RGB_TOG, RGB_RMOD, RGB_MOD, RGB_HUD,  RGB_HUI,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, RGB_SAD, RGB_SAI,  RGB_VAD, RGB_VAI,  RGB_SPD,  RGB_SPI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, RGB_M_P, RGB_M_B,  RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 };
 
