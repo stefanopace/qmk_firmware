@@ -58,6 +58,7 @@ enum tapdance {
 };
 
 static uint8_t shifts_state;
+static uint8_t weak_mods;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        /* Base qwerty Layer
@@ -205,12 +206,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void type_accented_letter(uint16_t keycode, uint16_t accent_keycode) {
     shifts_state = get_mods() & (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT));
+    weak_mods = get_weak_mods();
 
+    clear_weak_mods();
     unregister_mods(shifts_state);
 
     tap_code(COMPOSE_KEY);
     tap_code(accent_keycode);
 
+    add_weak_mods(weak_mods);
     register_mods(shifts_state);
     
     tap_code(keycode);

@@ -94,7 +94,7 @@ static inline void process_tap_dance_action_on_dance_finished(qk_tap_dance_actio
     if (action->state.finished) return;
     action->state.finished = true;
     add_mods(action->state.oneshot_mods);
-    //add_weak_mods(action->state.weak_mods);
+    add_weak_mods(action->state.weak_mods);
     send_keyboard_report();
     _process_tap_dance_action_fn(&action->state, action->user_data, action->fn.on_dance_finished);
 }
