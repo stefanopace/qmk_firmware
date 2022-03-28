@@ -104,11 +104,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * 
         * Holding Esc activates the Fn layer
         * Holding F or J activates Symbols layer
-        * Holding M or V activates Accented letters layer
         * Holding / acts as Shift
         * Double tap on ' acts as "
-        * 
-        * Nav and Num layers are togglable with triple tapping on relative keys while holding them will activate layers momentarily.
         * 
         * ,----------------------------------------------------------------------------.
         * |Esc-Fn|  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | Bspace  |
@@ -240,7 +237,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         */
     [_LED] = LAYOUT(
         XXXXXXX, RGB_TOG, RGB_RMOD, RGB_MOD, RGB_HUD,  RGB_HUI,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-        XXXXXXX, RGB_SAD, RGB_SAI,  RGB_VAD, RGB_VAI,  RGB_SPD,  RGB_SPI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, RGB_SAD, RGB_SAI,  RGB_VAD, RGB_VAI,  RGB_SPD,  RGB_SPI, KC_VOLD, KC_VOLU, KC_MUTE, XXXXXXX, XXXXXXX,
         XXXXXXX, RGB_M_P, RGB_M_B,  RGB_M_R, RGB_M_SW, RGB_M_SN, RGB_M_K, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,       XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
