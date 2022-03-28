@@ -42,7 +42,6 @@ enum layers {
     _NAV,
     _NV2,
     _FN,
-    _ACC,
     _LED,
 };
 
@@ -116,16 +115,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |----------------------------------------------------------------------------+
         * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  | '/"  | Enter |
         * |----------------------------------------------------------------------------+
-        * | Shift  |  Z  |  X  |  C  |V-Acc|  B  |  N  |M-Acc|  ,  |  .  |/-Shift| Led |
+        * | Shift  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|CLock|
         * |----------------------------------------------------------------------------+
-        * | Ctrl | Gui | Alt |CLock|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
+        * | Ctrl | Gui | Alt |(Led)|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
         * `----------------------------------------------------------------------------'
         */
     [_QWE] = LAYOUT(
-        LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,           KC_T,    KC_Y,           KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
-        KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,        KC_G,    KC_H,           LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        KC_LSFT,   KC_Z,     KC_X,     KC_C,     LT(_ACC, KC_V), KC_B,    KC_N,    LT(_ACC, KC_M),   KC_COMM,  KC_DOT,   SFT_SLSH,  MO(_LED),
-        KC_LCTL,   KC_LGUI,  KC_LALT,  KC_CAPS,  MO(_NAV),            KC_SPC,            MO(_NUM),   KC_LEFT,   KC_DOWN,  KC_UP,    KC_RGHT
+        LTFN_ESC,  KC_Q,     KC_W,     KC_E,     KC_R,           KC_T,    KC_Y,          KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
+        KC_TAB,    KC_A,     KC_S,     KC_D,     LTSYM_F,        KC_G,    KC_H,          LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
+        KC_LSFT,   KC_Z,     KC_X,     KC_C,     KC_V,           KC_B,    KC_N,          KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  KC_CAPS,
+        KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_LED), MO(_NAV),            KC_SPC,            MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
 
        /* Symbols Layer (Sym)
@@ -149,9 +148,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        /* Numbers Layer (Num)
         *
         * ,----------------------------------------------------------------------------.
-        * |      |     |     |     |     |    |Ctrl-y|     |     |     |     |         |
+        * |      |     |     | è/é |     |    |Ctrl-y|  ù  |  ì  |  ò  |     |         |
         * |----------------------------------------------------------------------------+
-        * |       |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0   |       |
+        * |   à   |  1  |  2  |  3  |  4  |  5  |  6  |  7  |  8  |  9  |  0   |       |
         * |----------------------------------------------------------------------------+
         * |        |Ctr-z|Ctr-x|Ctr-c|Ctr-v|     |     |     |  ,  |  .  |      |      |
         * |----------------------------------------------------------------------------+
@@ -159,10 +158,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * `----------------------------------------------------------------------------'
         */
     [_NUM] = LAYOUT(
-        _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,   XXXXXXX,  REDO,     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
-        _______,  KC_1,     KC_2,     KC_3,     KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
-        _______,  UNDO,     CUT,      COPY,     PASTE,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   _______,  _______,
-        _______,  _______,  _______,  _______,  XXXXXXX,        _______,       _______,  _______,  _______,  _______,  _______
+        _______,  XXXXXXX,  XXXXXXX, TD(TD_E_GRV_ACU),  XXXXXXX,   XXXXXXX,  REDO,     M_U_GRV,  M_I_GRV,  M_O_GRV,  XXXXXXX,  _______,
+        M_A_GRV,  KC_1,     KC_2,    KC_3,              KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
+        _______,  UNDO,     CUT,     COPY,              PASTE,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   _______,  _______,
+        _______,  _______,  _______, _______,           XXXXXXX,        _______,       _______,  _______,  _______,  _______,  _______
     ),
 
        /* Navigation Layer (Nav)
@@ -226,29 +225,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F4,    KC_F5,    KC_F6,    KC_F11,  XXXXXXX,
         XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F12,  XXXXXXX,
         XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,      XXXXXXX,      XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX, XXXXXXX
-    ),
-           
-        /* Accented letters layer
-        *
-        * For this to work you have to set the compose key on the os
-        *
-        * Double tap on è acts as é
-        *
-        * ,----------------------------------------------------------------------------.
-        * |      |     |     | è/é |     |     |     |  ù  |  ì  |  ò  |     |         |
-        * |----------------------------------------------------------------------------+
-        * |       |  à  |     |     |     |     |     |     |     |     |      |       |
-        * |----------------------------------------------------------------------------+
-        * |        |     |     |     |     |     |     |     |     |     |      |      |
-        * |----------------------------------------------------------------------------+
-        * |      |     |     |     |     |            |      |     |     |      |      |
-        * `----------------------------------------------------------------------------'
-        */
-    [_ACC] = LAYOUT(
-        _______, _______, _______, TD(TD_E_GRV_ACU), _______, _______, _______, M_U_GRV, M_I_GRV, M_O_GRV, _______, _______,
-        _______, M_A_GRV, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______,          _______, _______,      _______,     _______, _______, _______, _______, _______
     ),
 
         /* Led layer
