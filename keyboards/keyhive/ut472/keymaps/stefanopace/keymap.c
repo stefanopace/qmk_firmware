@@ -68,14 +68,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * Holding Esc activates the Fn layer
         * Holding F or J activates Symbols layer
         * Holding / acts as Shift
+        * Double tap on Left Shift acts as Caps Lock
         * Double tap on ' acts as "
+        * Term sends Ctrl + Alt + '=' which in my os give focus to the terminal
         * 
         * ,----------------------------------------------------------------------------.
         * |Esc-Fn|  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | Bspace  |
         * |----------------------------------------------------------------------------+
         * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  | '/"  | Enter |
         * |----------------------------------------------------------------------------+
-        * |Shft/Cap|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Custo|
+        * |Shft/Cap|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Term |
         * |----------------------------------------------------------------------------+
         * | Ctrl | Gui | Alt |(Led)|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
         * `----------------------------------------------------------------------------'
@@ -127,12 +129,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        /* Navigation Layer (Nav)
         * 
         * This layer is optimized for gui handling and code navigation
-        * It makes easier to reach common key combinations as: Ctrl+Shift, Gui+Shift, Ctrl+Alt, Alt+Tab, Ctrl+F, Ctrl+S
+        * It makes easier to reach common key combinations as: Ctrl+Shift, Gui+Shift, Ctrl+Alt, Alt+Tab, Ctrl+F
         * 
         * Holding (Nav2) replaces arrow keys with Home PgDown PgUp End
-        * 
-        * 
-        * Custom1 will act as Ctrl+Alt+"=" that can be used for example to focus last spawned terminal
         * 
         * ,----------------------------------------------------------------------------.
         * |      |Shift|Shift|Shift|     |     |     |     |     |     |     |         |
