@@ -31,7 +31,7 @@
 #define COPY LCTL(KC_C)
 #define PASTE LCTL(KC_V)
 
-#define CUSTOM1 LCA(KC_EQL)
+#define TERM LCA(KC_EQL)
 
 #define L_SHIFT_HELD (get_mods() & (MOD_BIT(KC_LSFT)))
 #define R_SHIFT_HELD (get_mods() & (MOD_BIT(KC_RSFT)))
@@ -56,7 +56,8 @@ enum custom_keycodes {
 enum tapdance {
     TD_SINGLE_QUOTE_DOUBLE_QUOTES,
     TD_SHIFT_CAPS_LOCK,
-    TD_E_GRV_ACU
+    TD_E_GRV_ACU,
+    TD_DOLLAR_EUR,
 };
 
 static uint8_t shifts_state;
@@ -85,13 +86,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWE] = LAYOUT(
         LTFN_ESC,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,    KC_Y,  KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
         KC_TAB,    KC_A,     KC_S,     KC_D,      LTSYM_F,   KC_G,    KC_H,  LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        TD_SHCAP,  KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,    KC_N,  KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  CUSTOM1,
+        TD_SHCAP,  KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,    KC_N,  KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  TERM,
         KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_LED),  MO(_NAV),       KC_SPC,    MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
 
        /* Symbols Layer (Sym)
         * ,----------------------------------------------------------------------------.
-        * |      |  `  |  @  |  #  |  $  |  %  |     |  &  |  *  |  ^  |     |  Del    |
+        * |      |  `  |  @  |  #  | $/€ |  %  |     |  &  |  *  |  ^  |     |  Del    |
         * |----------------------------------------------------------------------------+
         * |       |  ~  |  {  |  -  |  (  |  +  |  =  |  )  |  |  |  }  |   ;  |       |
         * |----------------------------------------------------------------------------+
@@ -101,10 +102,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * `----------------------------------------------------------------------------'
         */
     [_SYM] = LAYOUT(
-        _______,  KC_GRV,   KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,  KC_AMPR,  KC_ASTR,  KC_CIRC,  XXXXXXX,  KC_DEL,
-        _______,  KC_TILD,  KC_LCBR,  KC_MINS,  KC_LPRN,  KC_PLUS,  KC_EQL,   KC_RPRN,  KC_PIPE,  KC_RCBR,  KC_SCLN,  _______,
-        _______,  KC_EXLM,  KC_LT,    KC_UNDS,  KC_LBRC,  XXXXXXX,  KC_COLN,  KC_RBRC,  KC_BSLS,  KC_GT,    KC_QUES,  _______,
-        _______,  _______,  _______,  _______,  XXXXXXX,       _______,       XXXXXXX,  _______,  _______,  _______,  _______
+        _______,  KC_GRV,   KC_AT,    KC_HASH,  TD(TD_DOLLAR_EUR),   KC_PERC,  XXXXXXX,  KC_AMPR,  KC_ASTR,  KC_CIRC,  XXXXXXX,  KC_DEL,
+        _______,  KC_TILD,  KC_LCBR,  KC_MINS,  KC_LPRN,             KC_PLUS,  KC_EQL,   KC_RPRN,  KC_PIPE,  KC_RCBR,  KC_SCLN,  _______,
+        _______,  KC_EXLM,  KC_LT,    KC_UNDS,  KC_LBRC,             XXXXXXX,  KC_COLN,  KC_RBRC,  KC_BSLS,  KC_GT,    KC_QUES,  _______,
+        _______,  _______,  _______,  _______,  XXXXXXX,                  _______,       XXXXXXX,  _______,  _______,  _______,  _______
     ),
 
        /* Numbers Layer (Num)
@@ -138,7 +139,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |----------------------------------------------------------------------------+
         * |(Nav2) |Ctrl | Gui | Alt | Tab |     |Left |Down | Up  |Right|   F  |       |
         * |----------------------------------------------------------------------------+
-        * |        |     |     |     |     |     |     |     |     |     |      |      |
+        * |        |     |     |     |     |     |     |BSpc |     |     |      |      |
         * |----------------------------------------------------------------------------+
         * |      |     |     |     |     |            |       |    |     |      |      |
         * `----------------------------------------------------------------------------'
@@ -146,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
         _______,   KC_LSFT,  KC_LSFT,  KC_LSFT,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,
         MO(_NV2),  KC_LCTL,  KC_LGUI,  KC_LALT,  KC_TAB,   _______,  KC_LEFT,  KC_DOWN,   KC_UP,    KC_RGHT,  KC_F,     _______,
-        _______,   _______,  _______,  _______,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,
+        _______,   _______,  _______,  _______,  _______,  _______,  _______,  KC_BSPC,   _______,  _______,  _______,  _______,
         _______,   _______,  _______,  _______,  _______,       _______,       XXXXXXX,   _______,  _______,  _______,  _______
     ),
 
@@ -229,6 +230,14 @@ void type_accented_e (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+void type_dollar_or_euro (qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        tap_code16(KC_DLR);
+    } else {
+        type_accented_letter(KC_E, KC_EQL);
+    }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {         
         switch (keycode) {
@@ -252,5 +261,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
     [TD_SHIFT_CAPS_LOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSHIFT, KC_CAPS),
-    [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e)
+    [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e),
+    [TD_DOLLAR_EUR] = ACTION_TAP_DANCE_FN (type_dollar_or_euro)
 };
