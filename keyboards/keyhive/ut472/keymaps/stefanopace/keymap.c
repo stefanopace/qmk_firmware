@@ -33,9 +33,6 @@
 
 #define TERM LCA(KC_EQL)
 
-#define L_SHIFT_HELD (get_mods() & (MOD_BIT(KC_LSFT)))
-#define R_SHIFT_HELD (get_mods() & (MOD_BIT(KC_RSFT)))
-
 enum layers {
     _QWE,
     _SYM,
@@ -55,7 +52,6 @@ enum custom_keycodes {
 
 enum tapdance {
     TD_SINGLE_QUOTE_DOUBLE_QUOTES,
-    TD_SHIFT_CAPS_LOCK,
     TD_E_GRV_ACU,
     TD_DOLLAR_EUR,
 };
@@ -78,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |----------------------------------------------------------------------------+
         * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  | '/"  | Enter |
         * |----------------------------------------------------------------------------+
-        * |Shft/Cap|  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Term |
+        * | Shift  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Term |
         * |----------------------------------------------------------------------------+
         * | Ctrl | Gui | Alt |(Led)|(Nav) |   Space   |(Num) |Left |Down | Up   |Right |
         * `----------------------------------------------------------------------------'
@@ -86,7 +82,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWE] = LAYOUT(
         LTFN_ESC,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,    KC_Y,  KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
         KC_TAB,    KC_A,     KC_S,     KC_D,      LTSYM_F,   KC_G,    KC_H,  LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
-        TD_SHCAP,  KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,    KC_N,  KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  TERM,
+        KC_LSFT,   KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,    KC_N,  KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  TERM,
         KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_LED),  MO(_NAV),       KC_SPC,    MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
 
@@ -139,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |----------------------------------------------------------------------------+
         * |(Nav2) |Ctrl | Gui | Alt | Tab |     |Left |Down | Up  |Right|   F  |       |
         * |----------------------------------------------------------------------------+
-        * |        |     |     |     |     |     |     |BSpc |     |     |      |      |
+        * |CapsLock|     |     |     |     |     |     |BSpc |     |     |      |      |
         * |----------------------------------------------------------------------------+
         * |      |     |     |     |     |            |       |    |     |      |      |
         * `----------------------------------------------------------------------------'
@@ -147,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_NAV] = LAYOUT(
         _______,   KC_LSFT,  KC_LSFT,  KC_LSFT,  _______,  _______,  _______,  _______,   _______,  _______,  _______,  _______,
         MO(_NV2),  KC_LCTL,  KC_LGUI,  KC_LALT,  KC_TAB,   _______,  KC_LEFT,  KC_DOWN,   KC_UP,    KC_RGHT,  KC_F,     _______,
-        _______,   _______,  _______,  _______,  _______,  _______,  _______,  KC_BSPC,   _______,  _______,  _______,  _______,
+        KC_CAPS,   _______,  _______,  _______,  _______,  _______,  _______,  KC_BSPC,   _______,  _______,  _______,  _______,
         _______,   _______,  _______,  _______,  _______,       _______,       XXXXXXX,   _______,  _______,  _______,  _______
     ),
 
@@ -260,7 +256,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
-    [TD_SHIFT_CAPS_LOCK] = ACTION_TAP_DANCE_DOUBLE(KC_LSHIFT, KC_CAPS),
     [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e),
     [TD_DOLLAR_EUR] = ACTION_TAP_DANCE_FN (type_dollar_or_euro)
 };
