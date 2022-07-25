@@ -53,6 +53,7 @@ enum custom_keycodes {
 enum tapdance {
     TD_SINGLE_QUOTE_DOUBLE_QUOTES,
     TD_E_GRV_ACU,
+    TD_O_GRV_SCHWA,
     TD_DOLLAR_EUR,
 };
 
@@ -117,10 +118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * `----------------------------------------------------------------------------'
         */
     [_NUM] = LAYOUT(
-        _______,  XXXXXXX,  XXXXXXX, TD(TD_E_GRV_ACU),  XXXXXXX,   XXXXXXX,  REDO,     M_U_GRV,  M_I_GRV,  M_O_GRV,  XXXXXXX,  _______,
-        M_A_GRV,  KC_1,     KC_2,    KC_3,              KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     _______,
-        _______,  UNDO,     CUT,     COPY,              PASTE,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,   _______,  _______,
-        _______,  _______,  _______, _______,           XXXXXXX,        _______,       _______,  _______,  _______,  _______,  _______
+        _______,  XXXXXXX,  XXXXXXX, TD(TD_E_GRV_ACU),  XXXXXXX,   XXXXXXX,  REDO,     M_U_GRV,  M_I_GRV,  TD(TD_O_GRV_SCHWA),  XXXXXXX,  _______,
+        M_A_GRV,  KC_1,     KC_2,    KC_3,              KC_4,      KC_5,     KC_6,     KC_7,     KC_8,     KC_9,                KC_0,     _______,
+        _______,  UNDO,     CUT,     COPY,              PASTE,     XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_COMM,  KC_DOT,              _______,  _______,
+        _______,  _______,  _______, _______,           XXXXXXX,        _______,       _______,  _______,  _______,             _______,  _______
     ),
 
        /* Navigation Layer (Nav)
@@ -226,6 +227,14 @@ void type_accented_e (qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
+void type_schwa(qk_tap_dance_state_t *state, void *user_data) {
+    if (state->count == 1) {
+        type_accented_letter(KC_O, KC_GRV);
+    } else {
+        type_accented_letter(KC_E, KC_E);
+    }
+}
+
 void type_dollar_or_euro (qk_tap_dance_state_t *state, void *user_data) {
     if (state->count == 1) {
         tap_code16(KC_DLR);
@@ -243,9 +252,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             case M_I_GRV:
                 type_accented_letter(KC_I, KC_GRV);
                 return false;
-            case M_O_GRV:
-                type_accented_letter(KC_O, KC_GRV);
-                return false;
             case M_U_GRV:
                 type_accented_letter(KC_U, KC_GRV);
                 return false;
@@ -257,5 +263,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
     [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e),
+    [TD_O_GRV_SCHWA] = ACTION_TAP_DANCE_FN (type_schwa),
     [TD_DOLLAR_EUR] = ACTION_TAP_DANCE_FN (type_dollar_or_euro)
 };
