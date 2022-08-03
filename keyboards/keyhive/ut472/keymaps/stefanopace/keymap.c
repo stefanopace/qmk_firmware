@@ -21,7 +21,6 @@
 #define LTFN_ESC LT(_FN, KC_ESC)
 #define LTSYM_F LT(_SYM, KC_F)
 #define LTSYM_J LT(_SYM, KC_J)
-#define TD_QUOT TD(TD_SINGLE_QUOTE_DOUBLE_QUOTES)
 #define TD_SHCAP TD(TD_SHIFT_CAPS_LOCK)
 #define SFT_SLSH RSFT_T(KC_SLSH)
 
@@ -51,7 +50,6 @@ enum custom_keycodes {
 };
 
 enum tapdance {
-    TD_SINGLE_QUOTE_DOUBLE_QUOTES,
     TD_E_GRV_ACU,
     TD_O_GRV_SCHWA,
     TD_DOLLAR_EUR,
@@ -66,14 +64,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * Holding Esc activates the Fn layer
         * Holding F or J activates Symbols layer
         * Holding / acts as Shift
-        * Double tap on Left Shift acts as Caps Lock
-        * Double tap on ' acts as "
         * Term sends Ctrl + Alt + '=' which in my os give focus to the terminal
         * 
         * ,----------------------------------------------------------------------------.
         * |Esc-Fn|  Q  |  W  |  E  |  R  |  T  |  Y  |  U  |  I  |  O  |  P  | Bspace  |
         * |----------------------------------------------------------------------------+
-        * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  | '/"  | Enter |
+        * | Tab   |  A  |  S  |  D  |F-Sym|  G  |  H  |J-Sym|  K  |  L  |  '   | Enter |
         * |----------------------------------------------------------------------------+
         * | Shift  |  Z  |  X  |  C  |  V  |  B  |  N  |  M  |  ,  |  .  |/-Shift|Term |
         * |----------------------------------------------------------------------------+
@@ -82,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         */
     [_QWE] = LAYOUT(
         LTFN_ESC,  KC_Q,     KC_W,     KC_E,      KC_R,      KC_T,    KC_Y,  KC_U,      KC_I,     KC_O,     KC_P,      KC_BSPC,
-        KC_TAB,    KC_A,     KC_S,     KC_D,      LTSYM_F,   KC_G,    KC_H,  LTSYM_J,   KC_K,     KC_L,     TD_QUOT,   KC_ENT,
+        KC_TAB,    KC_A,     KC_S,     KC_D,      LTSYM_F,   KC_G,    KC_H,  LTSYM_J,   KC_K,     KC_L,     KC_QUOT,   KC_ENT,
         KC_LSFT,   KC_Z,     KC_X,     KC_C,      KC_V,      KC_B,    KC_N,  KC_M,      KC_COMM,  KC_DOT,   SFT_SLSH,  TERM,
         KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_LED),  MO(_NAV),       KC_SPC,    MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
@@ -261,7 +257,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 qk_tap_dance_action_t tap_dance_actions[] = {
-    [TD_SINGLE_QUOTE_DOUBLE_QUOTES] = ACTION_TAP_DANCE_DOUBLE(KC_QUOT, KC_DQUO),
     [TD_E_GRV_ACU] = ACTION_TAP_DANCE_FN (type_accented_e),
     [TD_O_GRV_SCHWA] = ACTION_TAP_DANCE_FN (type_schwa),
     [TD_DOLLAR_EUR] = ACTION_TAP_DANCE_FN (type_dollar_or_euro)
