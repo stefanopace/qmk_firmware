@@ -83,6 +83,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_LCTL,   KC_LGUI,  KC_LALT,  MO(_LED),  MO(_NAV),       KC_SPC,    MO(_NUM),  KC_LEFT,  KC_DOWN,  KC_UP,     KC_RGHT
     ),
 
+       /* Symbols Layer (Sym)
+        * ,----------------------------------------------------------------------------.
+        * |      |  `  |  @  |  #  | $/€ |  %  |  ^  |  &  |  *  |  ;  |     |  Del    |
+        * |----------------------------------------------------------------------------+
+        * |       |  ~  |  {  |  -  |  [  |  +  |  =  |  (  |  |  |  :  |   "  |       |
+        * |----------------------------------------------------------------------------+
+        * |        |  !  |  }  |  _  |  ]  |     |  \  |  )  |  <  |  >  |  ?   |      |
+        * |----------------------------------------------------------------------------+
+        * |      |     |     |     |     |            |      |     |     |      |      |
+        * `----------------------------------------------------------------------------'
+        */
+    [_SYM] = LAYOUT(
+        _______,  KC_GRV,   KC_AT,    KC_HASH,  TD(TD_DOLLAR_EUR),   KC_PERC,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_SCLN,  XXXXXXX,  KC_DEL,
+        _______,  KC_TILD,  KC_LCBR,  KC_MINS,  KC_LBRC,             KC_PLUS,  KC_EQL,   KC_LPRN,  KC_PIPE,  KC_COLN,  KC_DQUO,  _______,
+        _______,  KC_EXLM,  KC_RCBR,  KC_UNDS,  KC_RBRC,             XXXXXXX,  KC_BSLS,  KC_RPRN,  KC_LT,      KC_GT,  KC_QUES,  _______,
+        _______,  _______,  _______,  _______,  XXXXXXX,                  _______,       XXXXXXX,  _______,  _______,  _______,  _______
+    ),
+      
+       /* Symbols Layer (Sym)
+        * ,----------------------------------------------------------------------------.
+        * |      |  `  |  @  |  #  | $/€ |  %  |     |  &  |  *  |  ^  |     |  Del    |
+        * |----------------------------------------------------------------------------+
+        * |       |  ~  |  {  |  -  |  [  |  +  |  =  |  (  |  |  |  ;  |   "  |       |
+        * |----------------------------------------------------------------------------+
+        * |        |  !  |  }  |  _  |  ]  |  \  |  :  |  )  |  <  |  >  |  ?   |      |
+        * |----------------------------------------------------------------------------+
+        * |      |     |     |     |     |            |      |     |     |      |      |
+        * `----------------------------------------------------------------------------'
+        */
+    // [_SYM] = LAYOUT(
+    //     _______,  KC_GRV,   KC_AT,    KC_HASH,  TD(TD_DOLLAR_EUR),   KC_PERC,  XXXXXXX,  KC_AMPR,  KC_ASTR,  KC_CIRC,  XXXXXXX,  KC_DEL,
+    //     _______,  KC_TILD,  KC_LCBR,  KC_MINS,  KC_LBRC,             KC_PLUS,  KC_EQL,   KC_LPRN,  KC_PIPE,  KC_SCLN,  KC_DQUO,  _______,
+    //     _______,  KC_EXLM,  KC_RCBR,  KC_UNDS,  KC_RBRC,             KC_BSLS,  KC_COLN,  KC_RPRN,  KC_LT,      KC_GT,  KC_QUES,  _______,
+    //     _______,  _______,  _______,  _______,  XXXXXXX,                  _______,       XXXXXXX,  _______,  _______,  _______,  _______
+    // ),
 
        /* Symbols Layer (Sym)
         * ,----------------------------------------------------------------------------.
@@ -95,12 +130,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         * |      |     |     |     |     |            |      |     |     |      |      |
         * `----------------------------------------------------------------------------'
         */
-    [_SYM] = LAYOUT(
-        _______,  KC_GRV,   KC_AT,    KC_HASH,  TD(TD_DOLLAR_EUR),   KC_PERC,  XXXXXXX,  KC_AMPR,  KC_ASTR,  KC_CIRC,  XXXXXXX,  KC_DEL,
-        _______,  KC_TILD,  KC_BSLS,  KC_MINS,  KC_UNDS,             KC_PLUS,  KC_EQL,   KC_COLN,  KC_PIPE,  KC_SCLN,  KC_DQUO,  _______,
-        _______,  KC_EXLM,  KC_LCBR,  KC_RCBR,  KC_LBRC,             KC_RBRC,  KC_LPRN,  KC_RPRN,  KC_LT,      KC_GT,  KC_QUES,  _______,
-        _______,  _______,  _______,  _______,  XXXXXXX,                  _______,       XXXXXXX,  _______,  _______,  _______,  _______
-    ),
+    // [_SYM] = LAYOUT(
+    //     _______,  KC_GRV,   KC_AT,    KC_HASH,  TD(TD_DOLLAR_EUR),   KC_PERC,  XXXXXXX,  KC_AMPR,  KC_ASTR,  KC_CIRC,  XXXXXXX,  KC_DEL,
+    //     _______,  KC_TILD,  KC_BSLS,  KC_MINS,  KC_UNDS,             KC_PLUS,  KC_EQL,   KC_COLN,  KC_PIPE,  KC_SCLN,  KC_DQUO,  _______,
+    //     _______,  KC_EXLM,  KC_LCBR,  KC_RCBR,  KC_LBRC,             KC_RBRC,  KC_LPRN,  KC_RPRN,  KC_LT,      KC_GT,  KC_QUES,  _______,
+    //     _______,  _______,  _______,  _______,  XXXXXXX,                  _______,       XXXXXXX,  _______,  _______,  _______,  _______
+    // ),
 
        /* Symbols Layer (Sym)
         * ,----------------------------------------------------------------------------.
